@@ -1,0 +1,35 @@
+#!/bin/ksh
+#    SCCS ID: $HeadURL$
+#    SCCS ID: @(#)$Id$
+
+PROCESSOR=`uname -p`
+echo $PROCESSOR
+#if [ $PROCESSOR != 'x86_64' ] ; then
+#   export IDL_DIR=/opt/global/rsi/idl
+#   export IDL_INIT=/opt/global/rsi/idl/bin/idl_setup.ksh
+#else
+#   export IDL_DIR=/site/opt/idl/idl
+#   export IDL_INIT=${IDL_DIR}/bin/idl_setup.ksh
+#fi
+#
+
+###/u/alpha/bin/idl_init.ksh
+
+#export IDL_DIR=/u/alpha
+#export IDL_INIT=${IDL_DIR}/bin/idl_init.ksh
+
+#export IDL_INIT=/u/alpha/bin/idl_setup.ksh
+#export IDL_INIT=/u/alpha/bin/idl_setup.ksh
+
+export IDL_DIR=/opt/idl/idl81
+
+export IDL_INIT=${IDL_DIR}/bin/idl_setup.ksh
+
+. $IDL_INIT
+
+idl << EOF
+.compile autoconvert_ftw_NG_ncdf.pro 
+resolve_all
+save,/routines,filename='autoconvert_ftw_NG_ncdf.sav'
+exit
+EOF
